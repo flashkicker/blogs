@@ -1,5 +1,4 @@
 import _ from "lodash"
-// import { shuffleArray } from '../utils'
 import placeholder from "../api/placeholder"
 
 export const fetchPostsAndUsers = () => {
