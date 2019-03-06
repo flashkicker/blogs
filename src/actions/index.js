@@ -1,4 +1,5 @@
 import _ from "lodash"
+// import { shuffleArray } from '../utils'
 import placeholder from "../api/placeholder"
 
 export const fetchPostsAndUsers = () => {
@@ -22,8 +23,13 @@ export const fetchPostsAndUsers = () => {
 export const fetchPosts = () => {
 	return async dispatch => {
 		const response = await placeholder.get("/posts")
+		// Shuffle array
+		const shuffledArray = response.data.sort(() => 0.5 - Math.random());
 
-		dispatch({ type: "FETCH_POSTS", payload: response.data })
+		// Get sub-array of first 10 elements after shuffling
+		let selected = shuffledArray.slice(0, 10);
+
+		dispatch({ type: "FETCH_POSTS", payload: selected })
 	}
 }
 
