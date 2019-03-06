@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
-import { fetchPosts } from "../actions"
+import UserHeader from './UserHeader'
+import { fetchPostsAndUsers } from "../actions"
 
 class PostList extends Component {
 	shuffleArray(array) {
@@ -14,12 +15,12 @@ class PostList extends Component {
 	}
 
 	componentDidMount() {
-		this.props.fetchPosts()
+		this.props.fetchPostsAndUsers()
 	}
 
 	renderList() {
 		return this.props.posts.map(post => {
-			const { id, title, body } = post
+			const { id, title, body, userId } = post
 			return (
 				<div className="item" key={id}>
 					<i className="large middle aligned icon user" />
@@ -28,6 +29,7 @@ class PostList extends Component {
 							<h2>{title}</h2>
 							<p>{body}</p>
 						</div>
+                        <UserHeader userId={userId} />
 					</div>
 				</div>
 			)
@@ -46,6 +48,6 @@ const mapStateToProps = state => {
 export default connect(
 	mapStateToProps,
 	{
-		fetchPosts
+		fetchPostsAndUsers
 	}
 )(PostList)
